@@ -1,0 +1,288 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <!-- ================================================
+    1. CODIFICACIÓN DE CARACTERES
+       Sin esto: tildes y ñ se rompen.
+       Siempre debe ser la primera línea del <head>.
+  ================================================= -->
+    <meta charset="UTF-8" />
+
+    <!-- ================================================
+    2. VIEWPORT
+       Hace que el diseño funcione en móviles.
+       width=device-width → usa el ancho real del dispositivo
+       initial-scale=1.0  → no hace zoom automático
+  ================================================= -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- ================================================
+    3. SEO BÁSICO
+       Google usa "description" en los resultados de búsqueda.
+  ================================================= -->
+    <meta
+      name="description"
+      content="Portafolio de Fabricio Galindo Copado, Desarrollador Web Full Stack"
+    />
+    <meta name="author" content="Fabricio Galindo Copado" />
+
+    <!-- ================================================
+    4. TÍTULO DE LA PESTAÑA
+  ================================================= -->
+    <title>Fabricio Galindo — Dev Full Stack</title>
+
+    <!-- ================================================
+    5. GOOGLE FONTS
+       preconnect: abre la conexión con el servidor de Google
+       ANTES de necesitarla → carga más rápida.
+       Fuentes elegidas:
+         · Syne       → títulos y cuerpo
+         · Space Mono → badges, código, etiquetas técnicas
+  ================================================= -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- ================================================
+    6. NUESTRO CSS
+       Va AL FINAL del <head> para que el navegador
+       lo cargue antes de pintar el <body>.
+  ================================================= -->
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
+    <!-- ================================================
+    MÓDULO 2: NAVBAR
+    BEM:
+      .navbar                  → Bloque
+      .navbar__logo            → Elemento
+      .navbar__links           → Elemento
+      .navbar__link            → Elemento
+      .navbar__link--cta       → Modificador del elemento link
+      .navbar__hamburger       → Elemento
+      .navbar__hamburger-line  → Elemento
+    Modificadores que agrega el JS:
+      .navbar--scrolled        → cuando el usuario hace scroll
+      .navbar__link--active    → link de la sección visible
+      .navbar__links--open     → menú abierto en móvil
+  ================================================= -->
+    <nav class="navbar" id="navbar">
+      <!-- navbar__logo: elemento del bloque navbar -->
+      <div class="navbar__logo">FG<span class="accent">.</span></div>
+
+      <!-- navbar__links: contenedor de links
+         El JS le agrega .navbar__links--open en móvil -->
+      <ul class="navbar__links">
+        <li><a href="#hero" class="navbar__link">Inicio</a></li>
+        <li><a href="#habilidades" class="navbar__link">Habilidades</a></li>
+        <li><a href="#proyectos" class="navbar__link">Proyectos</a></li>
+        <li><a href="#experiencia" class="navbar__link">Experiencia</a></li>
+        <!-- navbar__link--cta: modificador — variación visual del link -->
+        <li>
+          <a href="#contacto" class="navbar__link navbar__link--cta"
+            >Contacto</a
+          >
+        </li>
+      </ul>
+
+      <!-- navbar__hamburger: botón del menú móvil
+         aria-label: accesibilidad para lectores de pantalla -->
+      <button class="navbar__hamburger" id="hamburger" aria-label="Abrir menú">
+        <span class="navbar__hamburger-line"></span>
+        <span class="navbar__hamburger-line"></span>
+        <span class="navbar__hamburger-line"></span>
+      </button>
+    </nav>
+
+    <!-- ================================================
+    MÓDULO 3: HERO
+    BEM:
+      .hero                    → Bloque
+      .hero__bg-grid           → Elemento decorativo (vacío)
+      .hero__content           → Elemento contenedor flex
+      .hero__text              → Elemento bloque de texto
+      .hero__tag               → Elemento etiqueta técnica
+      .hero__name              → Elemento título principal
+      .hero__name--outline     → Modificador efecto contorno
+      .hero__desc              → Elemento descripción
+      .hero__badges            → Elemento contenedor badges
+      .hero__badge             → Elemento badge individual
+      .hero__actions           → Elemento contenedor botones
+      .hero__btn               → Elemento clase base botón
+      .hero__btn--primary      → Modificador botón sólido
+      .hero__btn--secondary    → Modificador botón con borde
+      .hero__links             → Elemento links sociales
+      .hero__social            → Elemento link individual
+      .hero__photo-wrap        → Elemento contenedor foto
+      .hero__photo-frame       → Elemento marco de la foto
+      .hero__photo             → Elemento imagen
+      .hero__photo-placeholder → Elemento placeholder
+      .hero__photo-glow        → Elemento decorativo (vacío)
+      .hero__scroll-indicator  → Elemento indicador scroll
+  ================================================= -->
+    <section class="hero" id="hero">
+      <!-- Cuadrícula decorativa de fondo — vacío, solo CSS -->
+      <div class="hero__bg-grid"></div>
+
+      <!-- Contenedor flex: texto izquierda, foto derecha -->
+      <div class="hero__content">
+        <!-- ── BLOQUE DE TEXTO ── -->
+        <div class="hero__text">
+          <!-- Etiqueta técnica — imita un comentario de código -->
+          <p class="hero__tag">// Desarrollador Web Full Stack</p>
+
+          <!-- h1: solo debe haber UNO por página -->
+          <h1 class="hero__name">
+            Fabricio<br />
+            <!-- El modificador --outline aplica el efecto
+               de texto en contorno solo al apellido -->
+            <span class="hero__name--outline">Galindo</span>
+          </h1>
+
+          <p class="hero__desc">
+            Construyo aplicaciones web funcionales y escalables.<br />
+            +20 años de experiencia técnica en CFE + formación Full Stack
+            moderna.
+          </p>
+
+          <div class="hero__badges">
+            <span class="hero__badge">React</span>
+            <span class="hero__badge">Node.js</span>
+            <span class="hero__badge">JavaScript</span>
+            <span class="hero__badge">MySQL</span>
+            <span class="hero__badge">PHP</span>
+            <span class="hero__badge">Git</span>
+          </div>
+
+          <!-- Usamos <a> y no <button> porque ambos navegan.
+             download → el navegador descarga en lugar de abrir -->
+          <div class="hero__actions">
+            <a href="#proyectos" class="hero__btn hero__btn--primary">
+              Ver proyectos
+            </a>
+            <a
+              href="img/cv-fabricio.pdf"
+              class="hero__btn hero__btn--secondary"
+              download
+            >
+              Descargar CV
+            </a>
+          </div>
+
+          <!-- target="_blank"           → abre en pestaña nueva
+             rel="noopener noreferrer" → seguridad: evita que la
+             página nueva manipule esta vía window.opener -->
+          <div class="hero__links">
+            <a
+              href="https://github.com/tuusuario"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="hero__social"
+              >GitHub</a
+            >
+            <a
+              href="https://linkedin.com/in/tuusuario"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="hero__social"
+              >LinkedIn</a
+            >
+          </div>
+        </div>
+        <!-- fin hero__text -->
+
+        <!-- ── BLOQUE DE FOTO ── -->
+        <div class="hero__photo-wrap">
+          <div class="hero__photo-frame">
+            <!-- onerror: si la imagen falla, la oculta y muestra
+               el siguiente elemento hermano (placeholder) -->
+            <img
+              src="img/fotoperfil.png"
+              alt="Fabricio Galindo — Desarrollador Web Full Stack"
+              class="hero__photo"
+              onerror="
+                this.style.display = 'none';
+                this.nextElementSibling.style.display = 'flex';
+              "
+            />
+            <!-- Visible solo si la imagen no carga -->
+            <div class="hero__photo-placeholder">
+              <p>Agrega tu foto<br /><code>img/foto.jpg</code></p>
+            </div>
+          </div>
+          <!-- fin hero__photo-frame -->
+
+          <!-- Div vacío — solo para el efecto de luz en CSS -->
+          <div class="hero__photo-glow"></div>
+        </div>
+        <!-- fin hero__photo-wrap -->
+      </div>
+      <!-- fin hero__content -->
+
+      <!-- Indicador de scroll animado -->
+      <div class="hero__scroll-indicator">
+        <span class="hero__scroll-text">Scroll</span>
+        <div class="hero__scroll-line"></div>
+      </div>
+    </section>
+
+    <!-- Secciones temporales — se reemplazarán módulo por módulo -->
+    <section
+      id="habilidades"
+      style="
+        height: 100vh;
+        display: grid;
+        place-items: center;
+        color: white;
+        font-family: sans-serif;
+        background: #0f0f18;
+      "
+    >
+      Habilidades — Módulo 4
+    </section>
+    <section
+      id="proyectos"
+      style="
+        height: 100vh;
+        display: grid;
+        place-items: center;
+        color: white;
+        font-family: sans-serif;
+      "
+    >
+      Proyectos — Módulo 5
+    </section>
+    <section
+      id="experiencia"
+      style="
+        height: 100vh;
+        display: grid;
+        place-items: center;
+        color: white;
+        font-family: sans-serif;
+        background: #0f0f18;
+      "
+    >
+      Experiencia — Módulo 6
+    </section>
+    <section
+      id="contacto"
+      style="
+        height: 100vh;
+        display: grid;
+        place-items: center;
+        color: white;
+        font-family: sans-serif;
+      "
+    >
+      Contacto — Módulo 7
+    </section>
+
+    <!-- El JS va AL FINAL del body — cuando se ejecuta,
+       todos los elementos HTML ya existen en el DOM -->
+    <script src="js/main.js"></script>
+  </body>
+</html>

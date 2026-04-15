@@ -1,0 +1,625 @@
+/* ==========================================================
+   CV INTERACTIVO — FABRICIO GALINDO
+   css/styles.css
+   ========================================================== */
+
+/* ----------------------------------------------------------
+   MÓDULO 1 — Variables globales
+
+   ¿Por qué usar variables?
+   Si quieres cambiar el color neón de verde a azul,
+   solo cambias UNA línea aquí y todo el sitio se actualiza.
+
+   :root → hace las variables accesibles en TODO el documento.
+---------------------------------------------------------- */
+:root {
+  /* Colores */
+  --bg: #0a0a0f; /* fondo principal            */
+  --bg-alt: #0f0f18; /* fondo de secciones alternas*/
+  --surface: #13131e; /* fondo de tarjetas          */
+  --accent: #00ffaa; /* verde neón — énfasis       */
+  --accent2: #00b8ff; /* azul neón  — secundario    */
+  --accent-glow: rgba(0, 255, 170, 0.25);
+  --border: rgba(0, 255, 170, 0.12);
+  --text: #e8e8f0; /* texto principal            */
+  --text-muted: #6b6b88; /* texto secundario           */
+
+  /* Tipografía */
+  --font-display: "Syne", sans-serif; /* títulos y cuerpo  */
+  --font-mono: "Space Mono", monospace; /* código y etiquetas */
+
+  /* Medidas */
+  --nav-h: 68px; /* altura del navbar                  */
+  --radius: 12px; /* radio de bordes de tarjetas        */
+  --transition: 0.3s ease;
+}
+
+/* ----------------------------------------------------------
+   MÓDULO 1 — Reset CSS
+
+   Elimina los estilos por defecto del navegador para que
+   Chrome, Firefox y Safari partan del mismo punto cero.
+---------------------------------------------------------- */
+
+/* box-sizing: border-box → padding y border se cuentan
+   DENTRO del ancho declarado, no se suman encima.         */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* scroll-behavior: smooth → los links #ancla desplazan
+   suavemente en lugar de saltar de golpe.                 */
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: var(--font-display);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul {
+  list-style: none;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+/* ----------------------------------------------------------
+   MÓDULO 1 — Utilidades globales
+
+   No pertenecen a ningún bloque BEM — son clases
+   reutilizables en cualquier parte del documento.
+---------------------------------------------------------- */
+
+/* Colorea cualquier texto con el color acento */
+.accent {
+  color: var(--accent);
+}
+
+/* Contenedor centrado con ancho máximo */
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+/* ----------------------------------------------------------
+   MÓDULO 2 — Bloque: navbar
+
+   BEM aplicado:
+     .navbar                 → Bloque
+     .navbar__logo           → Elemento
+     .navbar__links          → Elemento
+     .navbar__link           → Elemento
+     .navbar__link--cta      → Modificador de elemento
+     .navbar__link--active   → Modificador de elemento (JS)
+     .navbar__hamburger      → Elemento
+     .navbar__hamburger-line → Elemento
+     .navbar--scrolled       → Modificador de bloque (JS)
+     .navbar__links--open    → Modificador de elemento (JS)
+---------------------------------------------------------- */
+
+/* Bloque ------------------------------------------------- */
+.navbar {
+  position: fixed; /* flota sobre el contenido        */
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000; /* encima de todo — número alto gana */
+  height: var(--nav-h);
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2.5rem;
+
+  background: rgba(10, 10, 15, 0.85); /* semitransparente  */
+  backdrop-filter: blur(12px); /* efecto vidrio     */
+  border-bottom: 1px solid var(--border);
+  transition: var(--transition);
+}
+
+/* Modificador de bloque — agrega JS al hacer scroll */
+.navbar--scrolled {
+  background: rgba(10, 10, 15, 0.97);
+  border-bottom-color: rgba(0, 255, 170, 0.2);
+}
+
+/* Elemento: logo ---------------------------------------- */
+.navbar__logo {
+  font-family: var(--font-mono);
+  font-size: 1.35rem;
+  font-weight: 700;
+  letter-spacing: -1px;
+  cursor: default;
+}
+
+/* Elemento: lista de links ------------------------------ */
+.navbar__links {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+/* Elemento: link individual ----------------------------- */
+.navbar__link {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+  transition: color var(--transition);
+  position: relative; /* necesario para posicionar el ::after */
+}
+
+/* Línea animada que aparece bajo el link al hacer hover  */
+.navbar__link::after {
+  content: ""; /* pseudo-elemento vacío             */
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0; /* empieza invisible                 */
+  height: 1px;
+  background: var(--accent);
+  transition: width var(--transition); /* anima el crecimiento */
+}
+
+/* Estado hover y modificador --active (lo pone el JS)    */
+.navbar__link:hover,
+.navbar__link--active {
+  color: var(--text);
+}
+
+.navbar__link:hover::after {
+  width: 100%; /* la línea crece de 0 a 100%        */
+}
+
+/* Modificador de elemento: variante CTA (botón Contacto) */
+.navbar__link--cta {
+  padding: 0.4rem 1rem;
+  border: 1px solid var(--accent);
+  border-radius: 4px;
+  color: var(--accent) !important;
+  transition:
+    background var(--transition),
+    color var(--transition) !important;
+}
+
+.navbar__link--cta:hover {
+  background: var(--accent);
+  color: var(--bg) !important;
+}
+
+.navbar__link--cta::after {
+  display: none !important; /* el botón no lleva línea animada */
+}
+
+/* Elemento: botón hamburguesa (oculto en escritorio) ---- */
+.navbar__hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+}
+
+/* Elemento: cada línea del ícono ☰ */
+.navbar__hamburger-line {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: var(--text);
+  border-radius: 2px;
+  transition: var(--transition);
+}
+
+/* Responsive -------------------------------------------- */
+@media (max-width: 640px) {
+  .navbar {
+    padding: 0 1.5rem;
+  }
+  .navbar__links {
+    display: none;
+  }
+  .navbar__hamburger {
+    display: flex;
+  }
+
+  /* Modificador de elemento: menú desplegado en móvil     */
+  .navbar__links--open {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: var(--nav-h);
+    left: 0;
+    right: 0;
+    background: rgba(10, 10, 15, 0.98);
+    padding: 2rem;
+    gap: 1.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+}
+
+/* ----------------------------------------------------------
+   MÓDULO 3 — Bloque: hero
+---------------------------------------------------------- */
+
+/* Bloque ------------------------------------------------- */
+.hero {
+  position: relative; /* contexto para hijos con position absolute */
+  min-height: 100vh; /* siempre ocupa toda la pantalla            */
+  display: flex;
+  align-items: center;
+  padding-top: var(--nav-h); /* empuja el contenido bajo el navbar    */
+  overflow: hidden;
+}
+
+/* Elemento: cuadrícula de fondo (decorativo) ------------ */
+.hero__bg-grid {
+  position: absolute;
+  inset: 0; /* shorthand: top:0; right:0; bottom:0; left:0 */
+
+  /* Dos gradientes superpuestos forman la cuadrícula:
+     uno crea líneas horizontales, el otro verticales */
+  background-image:
+    linear-gradient(rgba(0, 255, 170, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 255, 170, 0.04) 1px, transparent 1px);
+  background-size: 60px 60px;
+
+  pointer-events: none; /* el mouse lo ignora, no interfiere con clicks */
+  z-index: 0;
+}
+
+/* Pseudo-elemento: vignette (oscurece los bordes)
+   Va ENCIMA del grid para crear profundidad          */
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse at 60% 50%,
+    transparent 30%,
+    /* centro transparente */ var(--bg) 80% /* bordes opacos       */
+  );
+  pointer-events: none;
+  z-index: 1; /* encima del grid (z:0) */
+}
+
+/* Elemento: contenedor principal (layout flex) ---------- */
+.hero__content {
+  position: relative;
+  z-index: 2; /* encima del grid (z:0) y el vignette (z:1) */
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 4rem 2rem;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 3rem;
+}
+
+/* Elemento: bloque de texto ----------------------------- */
+.hero__text {
+  flex: 1; /* ocupa todo el espacio disponible */
+  animation: fadeUp 0.9s ease both;
+}
+
+/* Elemento: etiqueta técnica */
+.hero__tag {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--accent);
+  margin-bottom: 1.2rem;
+  letter-spacing: 0.05em;
+}
+
+/* Elemento: nombre */
+.hero__name {
+  /* clamp(min, preferido, max):
+     escala con el viewport pero nunca sale de los límites */
+  font-size: clamp(3rem, 7vw, 5.5rem);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -2px;
+  margin-bottom: 1.5rem;
+}
+
+/* Modificador: apellido con efecto contorno */
+.hero__name--outline {
+  -webkit-text-stroke: 2px var(--accent); /* trazo verde neón  */
+  color: transparent; /* relleno invisible */
+}
+
+/* Elemento: descripción */
+.hero__desc {
+  font-size: 1rem;
+  line-height: 1.75;
+  color: var(--text-muted);
+  max-width: 480px;
+  margin-bottom: 1.8rem;
+  animation: fadeUp 0.9s ease 0.15s both; /* 150ms de retraso */
+}
+
+/* Elemento: contenedor de badges */
+.hero__badges {
+  display: flex;
+  flex-wrap: wrap; /* bajan de línea si no caben */
+  gap: 0.6rem;
+  margin-bottom: 2rem;
+  animation: fadeUp 0.9s ease 0.25s both;
+}
+
+/* Elemento: badge individual */
+.hero__badge {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  padding: 0.3rem 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: 50px; /* forma "pill" */
+  color: var(--text-muted);
+  background: rgba(255, 255, 255, 0.03);
+  transition:
+    border-color var(--transition),
+    color var(--transition);
+}
+
+.hero__badge:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+/* Elemento: contenedor de botones */
+.hero__actions {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  animation: fadeUp 0.9s ease 0.35s both;
+  flex-wrap: wrap;
+}
+
+/* Elemento: clase base compartida por ambos botones */
+.hero__btn {
+  padding: 0.75rem 1.8rem;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  font-weight: 700;
+  border-radius: 6px;
+  letter-spacing: 0.04em;
+  display: inline-block; /* padding funciona correctamente en <a> */
+  transition:
+    box-shadow var(--transition),
+    transform var(--transition),
+    background var(--transition),
+    color var(--transition),
+    border-color var(--transition);
+}
+
+/* Modificador: botón sólido */
+.hero__btn--primary {
+  background: var(--accent);
+  color: var(--bg);
+}
+
+.hero__btn--primary:hover {
+  box-shadow: 0 0 24px var(--accent-glow);
+  transform: translateY(-2px); /* sube 2px al hacer hover */
+}
+
+/* Modificador: botón con borde */
+.hero__btn--secondary {
+  border: 1px solid var(--border);
+  color: var(--text);
+}
+
+.hero__btn--secondary:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  transform: translateY(-2px);
+}
+
+/* Elemento: contenedor de links sociales */
+.hero__links {
+  display: flex;
+  gap: 1.5rem;
+  animation: fadeUp 0.9s ease 0.45s both;
+}
+
+/* Elemento: link social individual */
+.hero__social {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  transition: color var(--transition);
+  position: relative;
+}
+
+/* Línea animada bajo el link social */
+.hero__social::after {
+  content: "";
+  position: absolute;
+  bottom: -3px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--accent);
+  transition: width var(--transition);
+}
+
+.hero__social:hover {
+  color: var(--accent);
+}
+.hero__social:hover::after {
+  width: 100%;
+}
+
+/* Elemento: contenedor de la foto ----------------------- */
+.hero__photo-wrap {
+  position: relative;
+  flex-shrink: 0; /* no se encoge cuando el texto necesita espacio */
+  animation: fadeIn 1.1s ease 0.3s both;
+}
+
+/* Elemento: marco de la foto */
+.hero__photo-frame {
+  width: 300px;
+  height: 360px;
+  border-radius: 16px;
+  overflow: hidden; /* recorta la imagen a los bordes redondeados */
+  border: 1px solid var(--border);
+  background: var(--surface);
+  position: relative;
+  z-index: 2;
+}
+
+/* Elemento: imagen */
+.hero__photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* rellena el frame sin deformar */
+  object-position: center top; /* ancla la imagen arriba → muestra la cara */
+  transition: filter var(--transition);
+}
+
+/* Elemento: placeholder cuando no hay foto */
+.hero__photo-placeholder {
+  display: none; /* onerror en el HTML lo cambia a flex */
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  color: var(--text-muted);
+  text-align: center;
+  padding: 1.5rem;
+  font-size: 0.85rem;
+  line-height: 1.8;
+}
+
+.hero__photo-placeholder code {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--accent);
+}
+
+/* Elemento: mancha de luz detrás de la foto (decorativo) */
+.hero__photo-glow {
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  top: 30px;
+  left: 20px; /* desplazado de la foto para el efecto */
+  background: var(--accent);
+  border-radius: 50%;
+  filter: blur(80px); /* desenfoque extremo = mancha difusa */
+  opacity: 0.08;
+  z-index: 1; /* detrás del frame (z:2) */
+  pointer-events: none;
+}
+
+/* Elemento: indicador de scroll ------------------------- */
+.hero__scroll-indicator {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%); /* centrado horizontal */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  color: var(--text-muted);
+  opacity: 0.6;
+  animation: fadeIn 2s ease 1s both; /* aparece último */
+}
+
+.hero__scroll-line {
+  width: 1px;
+  height: 40px;
+  background: linear-gradient(to bottom, var(--accent), transparent);
+  animation: scrollPulse 2s ease infinite;
+}
+
+/* Animaciones ------------------------------------------- */
+
+/* Aparece subiendo desde abajo */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px); /* empieza 24px más abajo */
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Aparece desde transparente */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* La línea del scroll pulsa */
+@keyframes scrollPulse {
+  0%,
+  100% {
+    opacity: 0.3;
+    transform: scaleY(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scaleY(1.1);
+  }
+}
+
+/* Responsive -------------------------------------------- */
+@media (max-width: 900px) {
+  .hero__content {
+    flex-direction: column-reverse; /* foto arriba, texto abajo */
+    text-align: center;
+    padding: 3rem 1.5rem;
+  }
+
+  .hero__desc {
+    max-width: 100%;
+  }
+
+  .hero__badges,
+  .hero__actions,
+  .hero__links {
+    justify-content: center;
+  }
+
+  .hero__photo-frame {
+    width: 220px;
+    height: 264px;
+  }
+  .hero__photo-glow {
+    width: 220px;
+    height: 220px;
+  }
+}
