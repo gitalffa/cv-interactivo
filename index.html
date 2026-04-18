@@ -164,7 +164,7 @@
               Ver proyectos
             </a>
             <a
-              href="img/Fabricio_Galindo_Copado.pdf"
+              href="img/cv-fabricio.pdf"
               class="hero__btn hero__btn--secondary"
               download
             >
@@ -177,14 +177,14 @@
              página nueva manipule esta vía window.opener -->
           <div class="hero__links">
             <a
-              href="https://github.com/gitalffa/"
+              href="https://github.com/tuusuario"
               target="_blank"
               rel="noopener noreferrer"
               class="hero__social"
               >GitHub</a
             >
             <a
-              href="https://www.linkedin.com/in/fabricio-galindo-copado/"
+              href="https://linkedin.com/in/tuusuario"
               target="_blank"
               rel="noopener noreferrer"
               class="hero__social"
@@ -229,19 +229,133 @@
       </div>
     </section>
 
-    <!-- Secciones temporales — se reemplazarán módulo por módulo -->
-    <section
-      id="habilidades"
-      style="
-        height: 100vh;
-        display: grid;
-        place-items: center;
-        color: white;
-        font-family: sans-serif;
-        background: #0f0f18;
-      "
-    >
-      Habilidades — Módulo 4
+    <!-- ================================================
+    MÓDULO 4: HABILIDADES
+    BEM:
+      .skills                  → Bloque
+      .skills__container       → Elemento contenedor
+      .skills__header          → Elemento encabezado
+      .skills__title           → Elemento título
+      .skills__subtitle        → Elemento subtítulo
+      .skills__groups          → Elemento grid de grupos
+      .skills__group           → Elemento grupo individual
+      .skills__group-title     → Elemento título de grupo
+      .skills__list            → Elemento lista
+      .skills__item            → Elemento fila de habilidad
+      .skills__item--visible   → Modificador (JS lo agrega)
+      .skills__info            → Elemento fila nombre + %
+      .skills__name            → Elemento nombre
+      .skills__percent         → Elemento porcentaje
+      .skills__bar-track       → Elemento riel de la barra
+      .skills__bar-fill        → Elemento relleno animado
+  ================================================= -->
+    <section class="skills" id="habilidades">
+      <div class="skills__container">
+        <div class="skills__header">
+          <h2 class="skills__title">
+            Habilidades <span class="accent">Técnicas</span>
+          </h2>
+          <p class="skills__subtitle">// Lo que uso para construir</p>
+        </div>
+
+        <div class="skills__groups">
+          <!-- GRUPO FRONTEND -->
+          <div class="skills__group">
+            <h3 class="skills__group-title">Frontend</h3>
+            <ul class="skills__list">
+              <li class="skills__item">
+                <div class="skills__info">
+                  <span class="skills__name">HTML5</span>
+                  <span class="skills__percent">90%</span>
+                </div>
+                <div class="skills__bar-track">
+                  <div class="skills__bar-fill" data-level="90"></div>
+                </div>
+              </li>
+
+              <li class="skills__item">
+                <div class="skills__info">
+                  <span class="skills__name">CSS3</span>
+                  <span class="skills__percent">85%</span>
+                </div>
+                <div class="skills__bar-track">
+                  <div class="skills__bar-fill" data-level="85"></div>
+                </div>
+              </li>
+
+              <li class="skills__item">
+                <div class="skills__info">
+                  <span class="skills__name">JavaScript</span>
+                  <span class="skills__percent">55%</span>
+                </div>
+                <div class="skills__bar-track">
+                  <div class="skills__bar-fill" data-level="75"></div>
+                </div>
+              </li>
+
+              <li class="skills__item">
+                <div class="skills__info">
+                  <span class="skills__name">React</span>
+                  <span class="skills__percent">60%</span>
+                </div>
+                <div class="skills__bar-track">
+                  <div class="skills__bar-fill" data-level="60"></div>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <!-- fin skills__group Frontend -->
+
+          <!-- GRUPO BACKEND -->
+          <div class="skills__group">
+            <h3 class="skills__group-title">Backend</h3>
+            <ul class="skills__list">
+              <li class="skills__item">
+                <div class="skills__info">
+                  <span class="skills__name">Node.js</span>
+                  <span class="skills__percent">65%</span>
+                </div>
+                <div class="skills__bar-track">
+                  <div class="skills__bar-fill" data-level="65"></div>
+                </div>
+              </li>
+
+              <li class="skills__item">
+                <div class="skills__info">
+                  <span class="skills__name">Express.js</span>
+                  <span class="skills__percent">60%</span>
+                </div>
+                <div class="skills__bar-track">
+                  <div class="skills__bar-fill" data-level="60"></div>
+                </div>
+              </li>
+
+              <li class="skills__item">
+                <div class="skills__info">
+                  <span class="skills__name">PHP</span>
+                  <span class="skills__percent">80%</span>
+                </div>
+                <div class="skills__bar-track">
+                  <div class="skills__bar-fill" data-level="80"></div>
+                </div>
+              </li>
+
+              <li class="skills__item">
+                <div class="skills__info">
+                  <span class="skills__name">MySQL</span>
+                  <span class="skills__percent">80%</span>
+                </div>
+                <div class="skills__bar-track">
+                  <div class="skills__bar-fill" data-level="80"></div>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <!-- fin skills__group Backend -->
+        </div>
+        <!-- fin skills__groups -->
+      </div>
+      <!-- fin skills__container -->
     </section>
     <section
       id="proyectos"

@@ -623,3 +623,135 @@ img {
     height: 220px;
   }
 }
+
+/* ----------------------------------------------------------
+   MÓDULO 4 — Bloque: skills
+---------------------------------------------------------- */
+
+/* Bloque ------------------------------------------------- */
+.skills {
+  padding: 6rem 0;
+  background: var(--bg-alt);
+}
+
+/* Elemento: contenedor centrado */
+.skills__container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+/* Elemento: encabezado de sección */
+.skills__header {
+  margin-bottom: 3.5rem;
+}
+
+.skills__title {
+  font-size: clamp(2rem, 4vw, 2.8rem);
+  font-weight: 800;
+  letter-spacing: -1px;
+  margin-bottom: 0.5rem;
+}
+
+.skills__subtitle {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+/* Elemento: grid de dos columnas (Frontend + Backend) */
+.skills__groups {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* dos columnas iguales */
+  gap: 3rem;
+}
+
+/* Elemento: grupo individual */
+.skills__group {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Elemento: título del grupo (FRONTEND / BACKEND) */
+.skills__group-title {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  color: var(--accent);
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--border);
+}
+
+/* Elemento: lista de habilidades */
+.skills__list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+/* Elemento: fila de una habilidad
+   Estado inicial: invisible y desplazada hacia abajo
+   La transición se dispara cuando el JS agrega --visible */
+.skills__item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  opacity: 0;
+  transform: translateY(16px);
+  transition:
+    opacity 0.5s ease,
+    transform 0.5s ease;
+}
+
+/* Modificador: item visible — JS lo agrega al entrar al viewport */
+.skills__item--visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Elemento: fila con nombre y porcentaje */
+.skills__info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.skills__name {
+  font-size: 0.9rem;
+  color: var(--text);
+  font-weight: 600;
+}
+
+.skills__percent {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--accent);
+}
+
+/* Elemento: riel de la barra (fondo gris) */
+.skills__bar-track {
+  height: 4px;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 2px;
+  overflow: hidden; /* recorta el fill para que no desborde */
+}
+
+/* Elemento: relleno animado
+   Empieza en width: 0% — el JS lo lleva al valor de data-level
+   La transition hace el crecimiento suave durante 1 segundo   */
+.skills__bar-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, var(--accent), var(--accent2));
+  border-radius: 2px;
+  transition: width 1s ease;
+}
+
+/* Responsive -------------------------------------------- */
+@media (max-width: 700px) {
+  .skills__groups {
+    grid-template-columns: 1fr; /* una columna en móvil */
+  }
+}

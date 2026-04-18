@@ -51,8 +51,8 @@ const sectionObserver = new IntersectionObserver(
       }
     });
   },
-  { threshold: 0.5 },
-); // 0.5 = sección debe estar 50% visible
+  { threshold: 0.4 },
+); // 0.4 = sección debe estar 40% visible
 
 sections.forEach((section) => sectionObserver.observe(section));
 
@@ -74,3 +74,44 @@ navLinks.querySelectorAll(".navbar__link").forEach((link) => {
 });
 
 console.log("✅ main.js cargado — Módulos 1 y 2 listos");
+
+/* ----------------------------------------------------------
+   MÓDULO 4 — Habilidades: animación de barras de progreso
+
+   Flujo:
+   1. IntersectionObserver detecta cuando un .skills__item
+      entra al viewport
+   2. setTimeout escalonado → efecto cascada
+   3. Se agrega .skills__item--visible → aparece el item
+   4. Se lee data-level del .skills__bar-fill
+   5. Se asigna ese valor como width → la barra crece
+---------------------------------------------------------- */
+const skillItems = document.querySelectorAll(".skills__item");
+
+const skillsObserver = new IntersectionObserver(
+  (entries) => {
+    entries.forEach((entry, index) => {
+      if (entry.isIntersecting) {
+        // Delay escalonado: cada item espera 100ms más que el anterior
+        // index 0 → 0ms, index 1 → 100ms, index 2 → 200ms...
+        setTimeout(() => {
+          // Activa la transición CSS de opacidad y posición
+          entry.target.classList.add("skills__item--visible");
+
+          // Lee el valor de data-level del elemento hijo
+          const bar = entry.target.querySelector(".skills__bar-fill");
+          const level = bar.getAttribute("data-level");
+
+          // Asigna el width — la transition CSS lo anima suavemente
+          bar.style.width = level + "%";
+        }, index * 100);
+
+        // Deja de observar — la animación ocurre solo una vez
+        skillsObserver.unobserve(entry.target);
+      }
+    });
+  },
+  { threshold: 0.2 },
+); // 20% visible es suficiente para disparar
+
+skillItems.forEach((item) => skillsObserver.observe(item));
