@@ -749,17 +749,95 @@ BEM:
       </div>
       <!-- fin experience__container -->
     </section>
-    <section
-      id="contacto"
-      style="
-        height: 100vh;
-        display: grid;
-        place-items: center;
-        color: white;
-        font-family: sans-serif;
-      "
-    >
-      Contacto — Módulo 7
+    <!-- ================================================
+MÓDULO 7: CONTACTO
+BEM:
+  .contact                   → Bloque
+  .contact__container        → Elemento contenedor
+  .contact__header           → Elemento encabezado
+  .contact__title            → Elemento título
+  .contact__subtitle         → Elemento subtítulo
+  .contact__desc             → Elemento descripción
+  .contact__links            → Elemento contenedor de links
+  .contact__link             → Elemento link individual
+  .contact__link--visible    → Modificador (JS lo agrega)
+  .contact__link-icon        → Elemento ícono
+  .contact__link-body        → Elemento cuerpo del link
+  .contact__link-label       → Elemento etiqueta
+  .contact__link-value       → Elemento valor
+  .contact__link-arrow       → Elemento flecha decorativa
+  .contact__footer           → Elemento pie de sección
+  .contact__footer-text      → Elemento texto del pie
+================================================ -->
+    <section class="contact" id="contacto">
+      <div class="contact__container">
+        <div class="contact__header">
+          <h2 class="contact__title">Hablemos <span class="accent">.</span></h2>
+          <p class="contact__subtitle">// Contacto</p>
+          <p class="contact__desc">
+            Estoy disponible para proyectos freelance, colaboraciones o
+            simplemente para intercambiar ideas. No dudes en escribirme.
+          </p>
+        </div>
+
+        <ul class="contact__links">
+          <!-- Email -->
+          <li class="contact__link" data-index="0">
+            <span class="contact__link-icon">✉</span>
+            <div class="contact__link-body">
+              <span class="contact__link-label">// Email</span>
+              <a
+                href="mailto:fabricio.alffa@gmail.com"
+                class="contact__link-value"
+                >fabricio.alffa@gmail.com</a
+              >
+            </div>
+            <span class="contact__link-arrow">→</span>
+          </li>
+
+          <!-- GitHub -->
+          <li class="contact__link" data-index="1">
+            <span class="contact__link-icon">⌥</span>
+            <div class="contact__link-body">
+              <span class="contact__link-label">// GitHub</span>
+              <a
+                href="https://github.com/gitalffa"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="contact__link-value"
+                >github.com/gitalffa</a
+              >
+            </div>
+            <span class="contact__link-arrow">→</span>
+          </li>
+
+          <!-- LinkedIn -->
+          <li class="contact__link" data-index="2">
+            <span class="contact__link-icon">◈</span>
+            <div class="contact__link-body">
+              <span class="contact__link-label">// LinkedIn</span>
+              <a
+                href="https://www.linkedin.com/in/fabricio-galindo-copado/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="contact__link-value"
+                >fabricio-galindo-copado</a
+              >
+            </div>
+            <span class="contact__link-arrow">→</span>
+          </li>
+        </ul>
+
+        <!-- Pie de sección / cierre del CV -->
+        <div class="contact__footer">
+          <p class="contact__footer-text">
+            Fabricio Galindo <span class="accent">—</span>
+            Desarrollador Web Full Stack
+            <span class="accent">.</span>
+          </p>
+        </div>
+      </div>
+      <!-- fin contact__container -->
     </section>
 
     <!-- El JS va AL FINAL del body — cuando se ejecuta,

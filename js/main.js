@@ -209,3 +209,34 @@ setTimeout(() => {
 }, 600);
 
 console.log("✅ Módulo 6 — Experiencia cargado");
+
+/* ----------------------------------------------------------
+   MÓDULO 7 — Contacto: animación de links
+
+   IntersectionObserver detecta cuando la sección entra
+   al viewport y anima cada link desde la izquierda
+   con delay escalonado.
+---------------------------------------------------------- */
+const contactLinks = document.querySelectorAll(".contact__link");
+
+const contactObserver = new IntersectionObserver(
+  (entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        contactLinks.forEach((link, index) => {
+          setTimeout(() => {
+            link.classList.add("contact__link--visible");
+          }, index * 150); // 0ms, 150ms, 300ms
+        });
+
+        contactObserver.unobserve(entry.target);
+      }
+    });
+  },
+  { threshold: 0.3 },
+);
+
+const contactSection = document.querySelector(".contact");
+if (contactSection) contactObserver.observe(contactSection);
+
+console.log("✅ Módulo 7 — Contacto cargado");

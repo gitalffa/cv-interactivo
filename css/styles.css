@@ -1393,3 +1393,174 @@ img {
     max-height: none;
   }
 }
+/* ----------------------------------------------------------
+   MÓDULO 7 — Bloque: contact
+
+   Layout:
+     Encabezado centrado + lista vertical de tres links.
+     Cada link es una fila con ícono, texto y flecha.
+
+   Animación:
+     Los links entran desde la izquierda con delay
+     escalonado via IntersectionObserver.
+---------------------------------------------------------- */
+
+/* Bloque ------------------------------------------------- */
+.contact {
+  padding: 6rem 0 4rem;
+  background: var(--bg);
+}
+
+/* Elemento: contenedor centrado */
+.contact__container {
+  max-width: 700px; /* más estrecho — sección de cierre */
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+/* Elemento: encabezado */
+.contact__header {
+  margin-bottom: 3.5rem;
+}
+
+.contact__title {
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  font-weight: 800;
+  letter-spacing: -2px;
+  margin-bottom: 0.5rem;
+}
+
+.contact__subtitle {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-bottom: 1.25rem;
+}
+
+.contact__desc {
+  font-size: 0.95rem;
+  line-height: 1.75;
+  color: var(--text-muted);
+  max-width: 480px;
+}
+
+/* ── LISTA DE LINKS ─────────────────────────────────── */
+
+.contact__links {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 4rem;
+}
+
+/* Elemento: link individual
+   Estado inicial: invisible y desplazado a la izquierda */
+.contact__link {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  padding: 1.25rem 1.5rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  cursor: pointer;
+  opacity: 0;
+  transform: translateX(-24px); /* entra desde la izquierda */
+  transition:
+    border-color var(--transition),
+    transform var(--transition),
+    background var(--transition),
+    opacity 0.5s ease;
+}
+
+/* Modificador: visible — JS lo agrega con delay escalonado */
+.contact__link--visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.contact__link:hover {
+  border-color: rgba(0, 255, 170, 0.3);
+  background: rgba(0, 255, 170, 0.03);
+}
+
+/* Mueve la flecha a la derecha al hacer hover */
+.contact__link:hover .contact__link-arrow {
+  transform: translateX(4px);
+  color: var(--accent);
+}
+
+/* Elemento: ícono decorativo */
+.contact__link-icon {
+  font-size: 1.4rem;
+  color: var(--accent);
+  flex-shrink: 0;
+  width: 2rem;
+  text-align: center;
+}
+
+/* Elemento: cuerpo del link (label + value) */
+.contact__link-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  flex: 1;
+}
+
+/* Elemento: etiqueta // Email, // GitHub, etc. */
+.contact__link-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  letter-spacing: 0.05em;
+}
+
+/* Elemento: valor — el link real */
+.contact__link-value {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text);
+  transition: color var(--transition);
+}
+
+.contact__link:hover .contact__link-value {
+  color: var(--accent);
+}
+
+/* Elemento: flecha decorativa */
+.contact__link-arrow {
+  font-family: var(--font-mono);
+  font-size: 1rem;
+  color: var(--text-muted);
+  flex-shrink: 0;
+  transition:
+    transform var(--transition),
+    color var(--transition);
+}
+
+/* ── PIE DE SECCIÓN ─────────────────────────────────── */
+
+.contact__footer {
+  padding-top: 2rem;
+  border-top: 1px solid var(--border);
+  text-align: center;
+}
+
+.contact__footer-text {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  letter-spacing: 0.05em;
+}
+
+/* Responsive -------------------------------------------- */
+@media (max-width: 640px) {
+  .contact__link {
+    padding: 1rem 1.25rem;
+    gap: 1rem;
+  }
+
+  .contact__link-value {
+    font-size: 0.85rem;
+  }
+}
