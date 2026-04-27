@@ -115,3 +115,97 @@ const skillsObserver = new IntersectionObserver(
 ); // 20% visible es suficiente para disparar
 
 skillItems.forEach((item) => skillsObserver.observe(item));
+
+/* ----------------------------------------------------------
+   MÓDULO 5 — Proyectos: animación de tarjetas
+
+   Mismo patrón que el Módulo 4 (skills):
+   IntersectionObserver detecta cuando cada tarjeta
+   entra al viewport y le agrega --visible con un
+   delay escalonado para el efecto cascada.
+---------------------------------------------------------- */
+const projectCards = document.querySelectorAll(".projects__card");
+
+const projectsObserver = new IntersectionObserver(
+  (entries) => {
+    entries.forEach((entry, index) => {
+      if (entry.isIntersecting) {
+        // Delay escalonado: 0ms, 120ms, 240ms, 360ms
+        setTimeout(() => {
+          entry.target.classList.add("projects__card--visible");
+        }, index * 120);
+
+        // Una sola vez — deja de observar tras animar
+        projectsObserver.unobserve(entry.target);
+      }
+    });
+  },
+  { threshold: 0.15 },
+);
+
+projectCards.forEach((card) => projectsObserver.observe(card));
+
+console.log("✅ Módulo 5 — Proyectos cargado");
+
+/* ----------------------------------------------------------
+   MÓDULO 6 — Experiencia: timeline interactivo
+
+   Tres comportamientos:
+     1. IntersectionObserver anima la línea y los items
+        al entrar al viewport
+     2. Clic en un item → toggle de --active (abre/cierra
+        la tarjeta) y cierra los demás
+     3. El primer item arranca abierto por defecto
+---------------------------------------------------------- */
+
+const expTrackFill = document.querySelector(".experience__track-fill");
+const expItems = document.querySelectorAll(".experience__item");
+const expTimeline = document.querySelector(".experience__timeline");
+
+/* 1. Animar línea e items al entrar al viewport ---------- */
+const expObserver = new IntersectionObserver(
+  (entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        // Anima la línea horizontal
+        expTrackFill.style.width = "100%";
+
+        // Anima cada item con delay escalonado
+        expItems.forEach((item, index) => {
+          setTimeout(() => {
+            item.classList.add("experience__item--visible");
+          }, index * 200); // 0ms, 200ms, 400ms
+        });
+
+        // Una sola vez
+        expObserver.unobserve(entry.target);
+      }
+    });
+  },
+  { threshold: 0.3 },
+);
+
+expObserver.observe(expTimeline);
+
+/* 2. Clic → abrir/cerrar tarjeta ------------------------- */
+expItems.forEach((item) => {
+  item.addEventListener("click", () => {
+    const isActive = item.classList.contains("experience__item--active");
+
+    // Cierra todos
+    expItems.forEach((i) => i.classList.remove("experience__item--active"));
+
+    // Si no estaba activo, lo abre — si ya estaba, queda cerrado (toggle)
+    if (!isActive) {
+      item.classList.add("experience__item--active");
+    }
+  });
+});
+
+/* 3. Primer item abierto por defecto --------------------- */
+// setTimeout para que la animación de entrada termine primero
+setTimeout(() => {
+  expItems[0].classList.add("experience__item--active");
+}, 600);
+
+console.log("✅ Módulo 6 — Experiencia cargado");

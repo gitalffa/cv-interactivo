@@ -289,7 +289,7 @@
                   <span class="skills__percent">55%</span>
                 </div>
                 <div class="skills__bar-track">
-                  <div class="skills__bar-fill" data-level="75"></div>
+                  <div class="skills__bar-fill" data-level="55"></div>
                 </div>
               </li>
 
@@ -357,30 +357,397 @@
       </div>
       <!-- fin skills__container -->
     </section>
-    <section
-      id="proyectos"
-      style="
-        height: 100vh;
-        display: grid;
-        place-items: center;
-        color: white;
-        font-family: sans-serif;
-      "
-    >
-      Proyectos — Módulo 5
+    <!-- ================================================
+MÓDULO 5: PROYECTOS
+BEM:
+  .projects                    → Bloque
+  .projects__container         → Elemento contenedor
+  .projects__header            → Elemento encabezado
+  .projects__title             → Elemento título
+  .projects__subtitle          → Elemento subtítulo
+  .projects__featured          → Elemento tarjeta destacada
+  .projects__featured-img      → Elemento imagen destacada
+  .projects__featured-body     → Elemento cuerpo destacada
+  .projects__featured-tag      → Elemento etiqueta "destacado"
+  .projects__featured-name     → Elemento nombre proyecto
+  .projects__featured-desc     → Elemento descripción
+  .projects__featured-tech     → Elemento lista de tecnologías
+  .projects__tech-badge        → Elemento badge de tecnología
+  .projects__featured-links    → Elemento contenedor links
+  .projects__link              → Elemento clase base link
+  .projects__link--primary     → Modificador link sólido
+  .projects__link--secondary   → Modificador link con borde
+  .projects__grid              → Elemento grid de menores
+  .projects__card              → Elemento tarjeta menor
+  .projects__card--visible     → Modificador (JS lo agrega)
+  .projects__card-header       → Elemento cabecera tarjeta
+  .projects__card-icon         → Elemento ícono decorativo
+  .projects__card-links        → Elemento links de tarjeta
+  .projects__card-name         → Elemento nombre
+  .projects__card-desc         → Elemento descripción
+  .projects__card-tech         → Elemento lista tech
+================================================ -->
+    <section class="projects" id="proyectos">
+      <div class="projects__container">
+        <div class="projects__header">
+          <h2 class="projects__title">
+            Proyectos <span class="accent">Recientes</span>
+          </h2>
+          <p class="projects__subtitle">// Lo que he construido</p>
+        </div>
+
+        <!-- TARJETA DESTACADA -->
+        <div class="projects__featured">
+          <!-- Lado izquierdo: imagen placeholder con gradiente -->
+          <div class="projects__featured-img">
+            <!-- <span class="projects__featured-img-label">Around</span>-->
+            <img
+              class="projects__featured-img img"
+              src="/img/arround.png"
+              alt=""
+            />
+          </div>
+
+          <!-- Lado derecho: información -->
+          <div class="projects__featured-body">
+            <span class="projects__featured-tag">// Proyecto destacado</span>
+            <h3 class="projects__featured-name">Around — Red Social</h3>
+            <p class="projects__featured-desc">
+              Red social para compartir fotografías con ubicación geográfica.
+              Permite agregar, editar y eliminar tarjetas de fotos, dar "me
+              gusta" y editar el perfil de usuario. Construido con HTML, CSS y
+              JavaScript vanilla.
+            </p>
+
+            <ul class="projects__featured-tech">
+              <li class="projects__tech-badge">HTML5</li>
+              <li class="projects__tech-badge">CSS3</li>
+              <li class="projects__tech-badge">JavaScript</li>
+              <li class="projects__tech-badge">BEM</li>
+              <li class="projects__tech-badge">GitHub Pages</li>
+            </ul>
+
+            <div class="projects__featured-links">
+              <a
+                href="https://gitalffa.github.io/web_project_around/src/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="projects__link projects__link--primary"
+                >Ver en vivo</a
+              >
+
+              <a
+                href="https://github.com/gitalffa/web_project_around"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="projects__link projects__link--secondary"
+                >GitHub</a
+              >
+            </div>
+          </div>
+        </div>
+        <!-- fin featured -->
+
+        <!-- GRID DE TARJETAS MENORES -->
+        <div class="projects__grid">
+          <!-- Tarjeta: Triple Espresso -->
+          <div class="projects__card">
+            <div class="projects__card-header">
+              <span class="projects__card-icon">☕</span>
+              <div class="projects__card-links">
+                <a
+                  href="https://github.com/gitalffa/web_project_coffeeshop"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="projects__link projects__link--secondary"
+                  >GitHub</a
+                >
+              </div>
+            </div>
+            <h3 class="projects__card-name">Triple Espresso</h3>
+            <p class="projects__card-desc">
+              Página web para cafetería ficticia con gestión visual de bebidas.
+              Diseño limpio orientado a escalabilidad futura.
+            </p>
+            <ul class="projects__card-tech">
+              <li class="projects__tech-badge">HTML5</li>
+              <li class="projects__tech-badge">CSS3</li>
+            </ul>
+          </div>
+
+          <!-- Tarjeta: Homeland -->
+          <div class="projects__card">
+            <div class="projects__card-header">
+              <span class="projects__card-icon">🌍</span>
+              <div class="projects__card-links">
+                <a
+                  href="https://github.com/gitalffa/web_project_homeland"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="projects__link projects__link--secondary"
+                  >GitHub</a
+                >
+              </div>
+            </div>
+            <h3 class="projects__card-name">Homeland</h3>
+            <p class="projects__card-desc">
+              Página editorial sobre los lugares de origen de los miembros del
+              equipo de TripleTen. Énfasis en tipografía y layout responsivo.
+            </p>
+            <ul class="projects__card-tech">
+              <li class="projects__tech-badge">HTML5</li>
+              <li class="projects__tech-badge">CSS3</li>
+              <li class="projects__tech-badge">Flexbox</li>
+            </ul>
+          </div>
+
+          <!-- Tarjeta: Biblioteca -->
+          <div class="projects__card">
+            <div class="projects__card-header">
+              <span class="projects__card-icon">📚</span>
+              <div class="projects__card-links">
+                <a
+                  href="https://github.com/gitalffa/web_project_library_es"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="projects__link projects__link--secondary"
+                  >GitHub</a
+                >
+              </div>
+            </div>
+            <h3 class="projects__card-name">Biblioteca Triple Peaks</h3>
+            <p class="projects__card-desc">
+              Sitio web para biblioteca con HTML5 semántico, Flexbox y
+              posicionamiento avanzado. Basado en brief de diseño.
+            </p>
+            <ul class="projects__card-tech">
+              <li class="projects__tech-badge">HTML5</li>
+              <li class="projects__tech-badge">CSS3</li>
+              <li class="projects__tech-badge">Flexbox</li>
+            </ul>
+          </div>
+
+          <!-- Tarjeta: Expenses -->
+          <div class="projects__card">
+            <div class="projects__card-header">
+              <span class="projects__card-icon">💰</span>
+              <div class="projects__card-links">
+                <a
+                  href="https://github.com/gitalffa/web_project_expenses_es"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="projects__link projects__link--secondary"
+                  >GitHub</a
+                >
+              </div>
+            </div>
+            <h3 class="projects__card-name">Control de Gastos</h3>
+            <p class="projects__card-desc">
+              Aplicación web para registrar y visualizar gastos personales.
+              Proyecto de práctica con lógica JavaScript.
+            </p>
+            <ul class="projects__card-tech">
+              <li class="projects__tech-badge">HTML5</li>
+              <li class="projects__tech-badge">CSS3</li>
+              <li class="projects__tech-badge">JavaScript</li>
+            </ul>
+          </div>
+        </div>
+        <!-- fin projects__grid -->
+      </div>
+      <!-- fin projects__container -->
     </section>
-    <section
-      id="experiencia"
-      style="
-        height: 100vh;
-        display: grid;
-        place-items: center;
-        color: white;
-        font-family: sans-serif;
-        background: #0f0f18;
-      "
-    >
-      Experiencia — Módulo 6
+    <!-- ================================================
+MÓDULO 6: EXPERIENCIA
+BEM:
+  .experience                    → Bloque
+  .experience__container         → Elemento contenedor
+  .experience__header            → Elemento encabezado
+  .experience__title             → Elemento título
+  .experience__subtitle          → Elemento subtítulo
+  .experience__timeline          → Elemento contenedor timeline
+  .experience__track             → Elemento línea horizontal
+  .experience__track-fill        → Elemento línea animada (JS)
+  .experience__items             → Elemento contenedor de items
+  .experience__item              → Elemento entrada individual
+  .experience__item--visible     → Modificador (JS lo agrega)
+  .experience__item--active      → Modificador item seleccionado
+  .experience__dot               → Elemento punto en la línea
+  .experience__dot-ring          → Elemento anillo animado
+  .experience__date              → Elemento fecha
+  .experience__card              → Elemento tarjeta de detalle
+  .experience__card-header       → Elemento cabecera tarjeta
+  .experience__role              → Elemento puesto
+  .experience__company           → Elemento empresa
+  .experience__period            → Elemento periodo
+  .experience__desc              → Elemento descripción
+  .experience__projects          → Elemento lista proyectos
+  .experience__project           → Elemento proyecto individual
+  .experience__project-name      → Elemento nombre proyecto
+  .experience__project-tech      → Elemento tecnologías
+  .experience__tech-tag          → Elemento tag de tecnología
+================================================ -->
+    <section class="experience" id="experiencia">
+      <div class="experience__container">
+        <div class="experience__header">
+          <h2 class="experience__title">
+            Experiencia <span class="accent">Profesional</span>
+          </h2>
+          <p class="experience__subtitle">// Mi trayectoria</p>
+        </div>
+
+        <div class="experience__timeline">
+          <!-- Línea horizontal de fondo -->
+          <div class="experience__track">
+            <!-- JS anima el fill de izquierda a derecha -->
+            <div class="experience__track-fill"></div>
+          </div>
+
+          <!-- Contenedor de los tres items -->
+          <div class="experience__items">
+            <!-- ITEM 1: CFE — Archivo Técnico -->
+            <div class="experience__item" data-index="0">
+              <div class="experience__dot">
+                <div class="experience__dot-ring"></div>
+              </div>
+              <span class="experience__date">1994</span>
+              <div class="experience__card">
+                <div class="experience__card-header">
+                  <div>
+                    <h3 class="experience__role">Técnico en Informática</h3>
+                    <p class="experience__company">
+                      CFE — Hidroeléctrica Aguamilpa
+                    </p>
+                  </div>
+                  <span class="experience__period">1994 — 2023</span>
+                </div>
+                <p class="experience__desc">
+                  29 años de servicio en la Hidroeléctrica Aguamilpa, Nayarit.
+                  Participé en los departamentos de Informática, Hidrometría,
+                  Producción, Civil y Control, desarrollando soluciones de
+                  software a medida para las necesidades operativas de la
+                  central.
+                </p>
+                <ul class="experience__projects">
+                  <li class="experience__project">
+                    <span class="experience__project-name">
+                      // Control Hidrológico — Cuenca Río Santiago
+                    </span>
+                    <p class="experience__desc">
+                      Sistema de monitoreo en tiempo real de gastos de entrada y
+                      salida (generación) de agua de la presa. Afluente
+                      principal de la cuenca del Río Santiago.
+                    </p>
+                    <ul class="experience__project-tech">
+                      <li class="experience__tech-tag">PHP</li>
+                      <li class="experience__tech-tag">MySQL</li>
+                      <li class="experience__tech-tag">CSS</li>
+                    </ul>
+                  </li>
+                  <li class="experience__project">
+                    <span class="experience__project-name">
+                      // Control de Turnos — Departamento de Producción
+                    </span>
+                    <p class="experience__desc">
+                      Sistema para gestión de turnos de operadores conforme al
+                      contrato colectivo y reglamento del rol de turnos del
+                      departamento.
+                    </p>
+                    <ul class="experience__project-tech">
+                      <li class="experience__tech-tag">PHP</li>
+                      <li class="experience__tech-tag">MySQL</li>
+                      <li class="experience__tech-tag">CSS</li>
+                    </ul>
+                  </li>
+                  <li class="experience__project">
+                    <span class="experience__project-name">
+                      // Archivo Técnico — Planos y Manuales
+                    </span>
+                    <p class="experience__desc">
+                      Sistema de consulta de planos y manuales técnicos de todos
+                      los equipos de la central, utilizado por ingenieros del
+                      área.
+                    </p>
+                    <ul class="experience__project-tech">
+                      <li class="experience__tech-tag">Clipper</li>
+                      <li class="experience__tech-tag">dBase</li>
+                    </ul>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <!-- fin item CFE -->
+
+            <!-- ITEM 2: Retiro -->
+            <div class="experience__item" data-index="1">
+              <div class="experience__dot">
+                <div class="experience__dot-ring"></div>
+              </div>
+              <span class="experience__date">2023</span>
+              <div class="experience__card">
+                <div class="experience__card-header">
+                  <div>
+                    <h3 class="experience__role">Jubilación</h3>
+                    <p class="experience__company">CFE</p>
+                  </div>
+                  <span class="experience__period">2023</span>
+                </div>
+                <p class="experience__desc">
+                  Tras 29 años de servicio, me jubilé de la Comisión Federal de
+                  Electricidad con una trayectoria de desarrollo de sistemas
+                  internos que optimizaron procesos clave de la central. Inicio
+                  de una nueva etapa enfocada en el desarrollo web moderno.
+                </p>
+              </div>
+            </div>
+            <!-- fin item Retiro -->
+
+            <!-- ITEM 3: TripleTen -->
+            <div class="experience__item" data-index="2">
+              <div class="experience__dot">
+                <div class="experience__dot-ring"></div>
+              </div>
+              <span class="experience__date">2024</span>
+              <div class="experience__card">
+                <div class="experience__card-header">
+                  <div>
+                    <h3 class="experience__role">
+                      Desarrollador Web Full Stack
+                    </h3>
+                    <p class="experience__company">TripleTen Bootcamp</p>
+                  </div>
+                  <span class="experience__period">2024 — Presente</span>
+                </div>
+                <p class="experience__desc">
+                  Formación intensiva en desarrollo web moderno. Enfocado en
+                  construir aplicaciones funcionales con tecnologías actuales,
+                  combinando la experiencia técnica acumulada con un stack
+                  moderno orientado al mercado laboral.
+                </p>
+                <ul class="experience__projects">
+                  <li class="experience__project">
+                    <span class="experience__project-name">
+                      // Stack tecnológico
+                    </span>
+                    <ul class="experience__project-tech">
+                      <li class="experience__tech-tag">HTML5</li>
+                      <li class="experience__tech-tag">CSS3</li>
+                      <li class="experience__tech-tag">JavaScript</li>
+                      <li class="experience__tech-tag">React</li>
+                      <li class="experience__tech-tag">Node.js</li>
+                      <li class="experience__tech-tag">Git</li>
+                    </ul>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <!-- fin item TripleTen -->
+          </div>
+          <!-- fin experience__items -->
+        </div>
+        <!-- fin experience__timeline -->
+      </div>
+      <!-- fin experience__container -->
     </section>
     <section
       id="contacto"

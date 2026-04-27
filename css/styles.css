@@ -755,3 +755,641 @@ img {
     grid-template-columns: 1fr; /* una columna en móvil */
   }
 }
+
+/* ----------------------------------------------------------
+   MÓDULO 5 — Bloque: projects
+
+   Layout:
+     1. Tarjeta destacada: flex row (imagen | info)
+     2. Grid de 2x2 para proyectos menores
+
+   Animación:
+     Las tarjetas del grid empiezan invisibles.
+     JS agrega .projects__card--visible cuando entran
+     al viewport via IntersectionObserver.
+---------------------------------------------------------- */
+
+/* Bloque ------------------------------------------------- */
+.projects {
+  padding: 6rem 0;
+  background: var(--bg); /* alterna con --bg-alt del módulo 4 */
+}
+
+/* Elemento: contenedor centrado */
+.projects__container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+/* Elemento: encabezado — mismo patrón que .skills__header */
+.projects__header {
+  margin-bottom: 3.5rem;
+}
+
+.projects__title {
+  font-size: clamp(2rem, 4vw, 2.8rem);
+  font-weight: 800;
+  letter-spacing: -1px;
+  margin-bottom: 0.5rem;
+}
+
+.projects__subtitle {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+/* ── TARJETA DESTACADA ─────────────────────────────────── */
+
+.projects__featured {
+  display: flex; /* imagen izquierda, texto derecha */
+  gap: 0;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden; /* recorta hijos al borde redondeado */
+  margin-bottom: 2.5rem;
+  background: var(--surface);
+  transition: border-color var(--transition);
+}
+
+.projects__featured:hover {
+  border-color: rgba(0, 255, 170, 0.3);
+}
+
+/* Elemento: lado izquierdo — imagen real del proyecto */
+.projects__featured-img {
+  flex: 0 0 340px; /* ancho fijo */
+  min-height: 300px;
+  border-right: 1px solid var(--border);
+  overflow: hidden; /* recorta la imagen al contenedor */
+  position: relative;
+}
+
+/* La imagen ocupa todo el contenedor sin deformarse */
+.projects__featured-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* recorta y centra — no estira */
+  object-position: center top; /* ancla arriba para mostrar lo más importante */
+  display: block;
+  transition: transform 0.4s ease;
+}
+
+/* Zoom sutil al hacer hover sobre la tarjeta destacada */
+.projects__featured:hover .projects__featured-img img {
+  transform: scale(1.04);
+}
+
+/* Nombre del proyecto en grande como fondo decorativo */
+.projects__featured-img-label {
+  font-family: var(--font-mono);
+  font-size: 4rem;
+  font-weight: 700;
+  color: rgba(0, 255, 170, 0.08);
+  user-select: none; /* no se puede seleccionar con el mouse */
+  letter-spacing: -2px;
+}
+
+/* Elemento: lado derecho — información */
+.projects__featured-body {
+  flex: 1;
+  padding: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* Elemento: etiqueta "// Proyecto destacado" */
+.projects__featured-tag {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--accent);
+  letter-spacing: 0.05em;
+}
+
+/* Elemento: nombre del proyecto */
+.projects__featured-name {
+  font-size: 1.6rem;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+}
+
+/* Elemento: descripción */
+.projects__featured-desc {
+  font-size: 0.92rem;
+  line-height: 1.75;
+  color: var(--text-muted);
+  max-width: 480px;
+}
+
+/* Elemento: lista de tecnologías (compartida con tarjetas) */
+.projects__featured-tech,
+.projects__card-tech {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  list-style: none;
+}
+
+/* Elemento: badge de tecnología — mismo estilo que .hero__badge */
+.projects__tech-badge {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  padding: 0.25rem 0.65rem;
+  border: 1px solid var(--border);
+  border-radius: 50px;
+  color: var(--text-muted);
+  background: rgba(255, 255, 255, 0.03);
+  transition:
+    border-color var(--transition),
+    color var(--transition);
+}
+
+.projects__tech-badge:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+/* Elemento: contenedor de links de la tarjeta destacada */
+.projects__featured-links {
+  display: flex;
+  gap: 1rem;
+  margin-top: 0.5rem;
+  flex-wrap: wrap;
+}
+
+/* Elemento: clase base compartida por ambos tipos de link */
+.projects__link {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 0.55rem 1.4rem;
+  border-radius: 6px;
+  letter-spacing: 0.04em;
+  display: inline-block;
+  transition:
+    background var(--transition),
+    color var(--transition),
+    border-color var(--transition),
+    box-shadow var(--transition),
+    transform var(--transition);
+}
+
+/* Modificador: link sólido — mismo patrón que .hero__btn--primary */
+.projects__link--primary {
+  background: var(--accent);
+  color: var(--bg);
+}
+
+.projects__link--primary:hover {
+  box-shadow: 0 0 20px var(--accent-glow);
+  transform: translateY(-2px);
+}
+
+/* Modificador: link con borde — mismo patrón que .hero__btn--secondary */
+.projects__link--secondary {
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+}
+
+.projects__link--secondary:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  transform: translateY(-2px);
+}
+
+/* ── GRID DE TARJETAS MENORES ──────────────────────────── */
+
+.projects__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* 2 columnas iguales */
+  gap: 1.5rem;
+}
+
+/* Elemento: tarjeta menor
+   Estado inicial: invisible y desplazada hacia abajo
+   JS agrega --visible cuando entra al viewport          */
+.projects__card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  transition:
+    border-color var(--transition),
+    transform var(--transition),
+    opacity 0.5s ease,
+    translate 0.5s ease;
+
+  /* Estado inicial para la animación de entrada */
+  opacity: 0;
+  translate: 0 20px;
+}
+
+/* Modificador: tarjeta visible — JS lo agrega */
+.projects__card--visible {
+  opacity: 1;
+  translate: 0 0;
+}
+
+.projects__card:hover {
+  border-color: rgba(0, 255, 170, 0.25);
+  transform: translateY(-4px);
+}
+
+/* Elemento: cabecera de tarjeta (ícono + links) */
+.projects__card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Elemento: ícono emoji decorativo */
+.projects__card-icon {
+  font-size: 1.6rem;
+  line-height: 1;
+}
+
+/* Elemento: nombre del proyecto */
+.projects__card-name {
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: -0.3px;
+}
+
+/* Elemento: descripción breve */
+.projects__card-desc {
+  font-size: 0.85rem;
+  line-height: 1.7;
+  color: var(--text-muted);
+  flex: 1; /* empuja el tech al fondo de la tarjeta */
+}
+
+/* Responsive -------------------------------------------- */
+@media (max-width: 900px) {
+  .projects__featured {
+    flex-direction: column; /* imagen arriba, texto abajo */
+  }
+
+  .projects__featured-img {
+    flex: 0 0 180px;
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .projects__featured-img-label {
+    font-size: 3rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .projects__grid {
+    grid-template-columns: 1fr; /* una columna en móvil */
+  }
+
+  .projects__featured-body {
+    padding: 1.5rem;
+  }
+}
+
+/* ----------------------------------------------------------
+   MÓDULO 6 — Bloque: experience
+
+   Layout:
+     Timeline horizontal con tres puntos sobre una línea.
+     Cada punto al hacer clic expande su tarjeta de detalle
+     hacia abajo.
+
+   Animación:
+     1. La línea crece de izquierda a derecha al entrar
+        al viewport (JS + transition en width)
+     2. Cada item aparece con fadeUp escalonado
+     3. El punto activo pulsa con el anillo animado
+---------------------------------------------------------- */
+
+/* Bloque ------------------------------------------------- */
+.experience {
+  padding: 6rem 0;
+  background: var(--bg-alt);
+}
+
+/* Elemento: contenedor centrado */
+.experience__container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+/* Elemento: encabezado */
+.experience__header {
+  margin-bottom: 4rem;
+}
+
+.experience__title {
+  font-size: clamp(2rem, 4vw, 2.8rem);
+  font-weight: 800;
+  letter-spacing: -1px;
+  margin-bottom: 0.5rem;
+}
+
+.experience__subtitle {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+/* ── TIMELINE ─────────────────────────────────────────── */
+
+/* Elemento: contenedor general del timeline */
+.experience__timeline {
+  position: relative;
+}
+
+/* Elemento: línea horizontal de fondo */
+.experience__track {
+  position: relative;
+  height: 2px;
+  background: var(--border);
+  margin: 0 2rem;
+  border-radius: 2px;
+}
+
+/* Elemento: relleno animado de la línea
+   Empieza en width:0 — JS lo lleva a 100% al entrar al viewport */
+.experience__track-fill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, var(--accent), var(--accent2));
+  border-radius: 2px;
+  transition: width 1.2s ease;
+}
+
+/* Elemento: contenedor flex de los items */
+.experience__items {
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  /* Sube los items para que los puntos queden sobre la línea */
+  margin-top: -8px;
+}
+
+/* Elemento: item individual
+   Estado inicial: invisible y desplazado hacia abajo    */
+.experience__item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+  cursor: pointer;
+  opacity: 0;
+  transform: translateY(20px);
+  transition:
+    opacity 0.5s ease,
+    transform 0.5s ease;
+}
+
+/* Modificador: item visible — JS lo agrega con delay escalonado */
+.experience__item--visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── PUNTO ──────────────────────────────────────────── */
+
+/* Elemento: punto sobre la línea */
+.experience__dot {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--bg-alt);
+  border: 2px solid var(--accent);
+  position: relative;
+  z-index: 2;
+  transition:
+    background var(--transition),
+    transform var(--transition);
+}
+
+/* Elemento: anillo pulsante alrededor del punto activo */
+.experience__dot-ring {
+  position: absolute;
+  inset: -6px; /* más grande que el punto */
+  border-radius: 50%;
+  border: 1px solid var(--accent);
+  opacity: 0;
+  transform: scale(0.6);
+  transition:
+    opacity var(--transition),
+    transform var(--transition);
+}
+
+/* Hover y estado activo del punto */
+.experience__item:hover .experience__dot,
+.experience__item--active .experience__dot {
+  background: var(--accent);
+  transform: scale(1.2);
+}
+
+/* El anillo aparece al hacer hover o cuando está activo */
+.experience__item:hover .experience__dot-ring,
+.experience__item--active .experience__dot-ring {
+  opacity: 0.5;
+  transform: scale(1);
+  /* Pulsa solo en el item activo */
+  animation: none;
+}
+
+.experience__item--active .experience__dot-ring {
+  animation: ringPulse 1.8s ease infinite;
+}
+
+/* ── FECHA ──────────────────────────────────────────── */
+
+.experience__date {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--accent);
+  margin-top: 0.75rem;
+  letter-spacing: 0.05em;
+}
+
+/* ── TARJETA DE DETALLE ─────────────────────────────── */
+
+/* Elemento: tarjeta — oculta por defecto
+   Al hacer clic JS agrega --active al item padre
+   y la tarjeta se expande con max-height          */
+.experience__card {
+  margin-top: 1.5rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 0;
+  width: 100%;
+  max-width: 320px;
+  max-height: 0; /* oculta */
+  overflow: hidden;
+  opacity: 0;
+  transition:
+    max-height 0.5s ease,
+    opacity 0.4s ease,
+    padding 0.4s ease,
+    border-color var(--transition);
+}
+
+/* Cuando el item tiene --active, la tarjeta se abre */
+.experience__item--active .experience__card {
+  max-height: 600px; /* valor alto para que quepa el contenido */
+  opacity: 1;
+  padding: 1.5rem;
+}
+
+.experience__item--active .experience__card,
+.experience__item:hover .experience__card {
+  border-color: rgba(0, 255, 170, 0.25);
+}
+
+/* Elemento: cabecera de la tarjeta */
+.experience__card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-bottom: 0.75rem;
+}
+
+/* Elemento: puesto */
+.experience__role {
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: -0.2px;
+  margin-bottom: 0.2rem;
+}
+
+/* Elemento: empresa */
+.experience__company {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--accent);
+}
+
+/* Elemento: periodo */
+.experience__period {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--text-muted);
+  white-space: nowrap; /* no parte el texto en dos líneas */
+  flex-shrink: 0;
+}
+
+/* Elemento: descripción */
+.experience__desc {
+  font-size: 0.82rem;
+  line-height: 1.7;
+  color: var(--text-muted);
+  margin-bottom: 0.75rem;
+}
+
+/* ── PROYECTOS DENTRO DE LA TARJETA ─────────────────── */
+
+.experience__projects {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+
+/* Elemento: proyecto individual */
+.experience__project {
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+/* Elemento: nombre del proyecto */
+.experience__project-name {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--accent2); /* azul neón para diferenciar de los títulos */
+  letter-spacing: 0.03em;
+}
+
+/* Elemento: lista de tecnologías */
+.experience__project-tech {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  list-style: none;
+}
+
+/* Elemento: tag de tecnología — más pequeño que .projects__tech-badge */
+.experience__tech-tag {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  padding: 0.2rem 0.55rem;
+  border: 1px solid var(--border);
+  border-radius: 50px;
+  color: var(--text-muted);
+  background: rgba(255, 255, 255, 0.02);
+}
+
+/* Animación del anillo pulsante */
+@keyframes ringPulse {
+  0%,
+  100% {
+    opacity: 0.5;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.15;
+    transform: scale(1.4);
+  }
+}
+
+/* Responsive -------------------------------------------- */
+@media (max-width: 900px) {
+  /* En móvil el timeline se convierte en lista vertical */
+  .experience__track {
+    display: none; /* ocultamos la línea horizontal */
+  }
+
+  .experience__items {
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-top: 0;
+  }
+
+  .experience__item {
+    align-items: flex-start; /* alineación a la izquierda */
+    flex-direction: row; /* punto + contenido en fila */
+    gap: 1rem;
+  }
+
+  .experience__dot {
+    margin-top: 0.2rem;
+    flex-shrink: 0;
+  }
+
+  .experience__date {
+    display: none; /* la fecha ya está en la tarjeta */
+  }
+
+  .experience__card {
+    max-height: none; /* siempre visible en móvil */
+    opacity: 1;
+    padding: 1.25rem;
+    max-width: 100%;
+  }
+
+  /* En móvil no hay interacción de clic — todo siempre abierto */
+  .experience__item--active .experience__card {
+    max-height: none;
+  }
+}
