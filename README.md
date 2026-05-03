@@ -7,6 +7,15 @@
 ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat&logo=javascript&logoColor=black)
 ![BEM](https://img.shields.io/badge/BEM-000000?style=flat&logoColor=white)
 
+---
+
+## 📸 Vista previa
+
+![Vista principal](./screenshot1.png)
+![Habilidades](./screenshot2.png)
+
+---
+
 ## 🔗 Demo en vivo
 
 👉 [Ver portafolio](https://gitalffa.github.io/cv-interactivo/)
@@ -16,6 +25,16 @@
 ## 📋 Descripción
 
 Sitio web de una sola página (SPA estática) que funciona como currículum vitae interactivo y portafolio profesional. Presenta experiencia, habilidades técnicas, proyectos destacados y formas de contacto, con animaciones activadas por scroll y un menú responsive para móviles.
+
+---
+
+## 💡 ¿Por qué un CV como página web?
+
+Siendo desarrollador web, me pareció más coherente presentarme
+con una página web que con un documento PDF.
+
+Es una forma práctica de mostrar lo que sé hacer mientras
+cuento quién soy. Dos objetivos en uno.
 
 ---
 
